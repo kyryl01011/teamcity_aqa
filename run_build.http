@@ -1,0 +1,96 @@
+### 0.1. Get X-TC-CSRF-Token
+GET http://admin:admin@localhost:8111/authenticationTest.html?csrf HTTP/1.1
+
+### 0.2. Get parent project locator (ID)
+GET http://admin:admin@localhost:8111/app/rest/projects HTTP/1.1
+Accept: application/json
+
+### 0.3. Check if project exists
+GET http://admin:admin@localhost:81118111/app/rest/projects/id:MyCustomProject
+Accept: application/json
+
+### 1. Create Project
+POST http://admin:admin@localhost:8111/app/rest/projects HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
+
+
+
+{
+    "parentProject": {
+        "locator": "_Root"
+    },
+    "name": "TestProjectCreation",
+    "id": "ID558",
+    "copyAllAssociatedSettings": true
+}
+
+### 2. Create Build Conf
+POST http://admin:admin@localhost:8111/app/rest/buildTypes
+Content-Type: application/json
+Accept: application/json
+X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
+
+
+
+{
+    "id": "testBuildConf",
+    "name": "testBuildConfName",
+    "project": {
+        "id": "ID558"
+    },
+    "steps": {
+        "step": [
+            {
+                "name": "myCommandLineStep",
+                "type": "simpleRunner",
+                "properties": {
+                    "property": [
+                        {
+                            "name": "test Hello",
+                            "value": "echo 'Hello World!'"
+                        },
+                        {
+                            "name": "teamcity.step.mode",
+                            "value": "default"
+                        },
+                        {
+                             "name": "use.custom.script",
+                            "value": "true"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
+
+### 3. Run Build
+POST http://admin:admin@localhost:8111/app/rest/buildQueue
+Content-Type: application/json
+Accept: application/json
+X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
+
+
+{
+	"buildType": {
+    	"id": "testBuildConf"
+	}
+}
+
+### 4. Get build info
+GET http://admin:admin@localhost:8111/app/rest/builds?id=testBuildConf
+Content-Type: application/json
+Accept: application/json
+
+### 4. Delete project
+
+POST http://admin:admin@localhost:8111/api/item
+Content-Type: application/json
+Accept: application/json
+X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
+
+
+
+{}
