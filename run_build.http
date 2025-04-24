@@ -1,44 +1,44 @@
-### 0.1. Get X-TC-CSRF-Token
-GET http://admin:admin@localhost:8111/authenticationTest.html?csrf HTTP/1.1
-
-### 0.2. Get parent project locator (ID)
-GET http://admin:admin@localhost:8111/app/rest/projects HTTP/1.1
+### 0.1 Get Project
+GET http://admin:admin@localhost:8111/app/rest/projects
 Accept: application/json
 
-### 0.3. Check if project exists
-GET http://admin:admin@localhost:81118111/app/rest/projects/id:MyCustomProject
+### 0.2 Get Build Conf
+GET http://admin:admin@localhost:8111/app/rest/buildTypes/id:SpringCoreForQa_Build
 Accept: application/json
+
+
+### 0. Get token
+GET http://admin:admin@localhost:8111/authenticationTest.html?csrf
+Accept: application/json
+
 
 ### 1. Create Project
-POST http://admin:admin@localhost:8111/app/rest/projects HTTP/1.1
+POST http://admin:admin@localhost:8111/app/rest/projects
 Content-Type: application/json
 Accept: application/json
-X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
-
-
+X-TC-CSRF-Token: 001eef37-3d74-4a5d-a256-2b73a8498ab5
 
 {
     "parentProject": {
         "locator": "_Root"
     },
-    "name": "TestProjectCreation",
-    "id": "ID558",
+    "name": "ProjectName",
+    "id": "idId",
     "copyAllAssociatedSettings": true
 }
+
 
 ### 2. Create Build Conf
 POST http://admin:admin@localhost:8111/app/rest/buildTypes
 Content-Type: application/json
 Accept: application/json
-X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
-
-
+X-TC-CSRF-Token: 001eef37-3d74-4a5d-a256-2b73a8498ab5
 
 {
-    "id": "testBuildConf",
-    "name": "testBuildConfName",
+    "id": "BuildConfId",
+    "name": "BuildConfName",
     "project": {
-        "id": "ID558"
+        "id": "idId"
     },
     "steps": {
         "step": [
@@ -48,7 +48,7 @@ X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
                 "properties": {
                     "property": [
                         {
-                            "name": "test Hello",
+                            "name": "script.content",
                             "value": "echo 'Hello World!'"
                         },
                         {
@@ -70,27 +70,16 @@ X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
 POST http://admin:admin@localhost:8111/app/rest/buildQueue
 Content-Type: application/json
 Accept: application/json
-X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
-
+X-TC-CSRF-Token: 001eef37-3d74-4a5d-a256-2b73a8498ab5
 
 {
 	"buildType": {
-    	"id": "testBuildConf"
+    	"id": "BuildConfId"
 	}
 }
 
-### 4. Get build info
-GET http://admin:admin@localhost:8111/app/rest/builds?id=testBuildConf
+
+### 4. Check build status
+GET http://admin:admin@localhost:8111/app/rest/buildQueue?locator=buildType(id:BuildConfId)
 Content-Type: application/json
 Accept: application/json
-
-### 4. Delete project
-
-POST http://admin:admin@localhost:8111/api/item
-Content-Type: application/json
-Accept: application/json
-X-TC-CSRF-Token: d9c22f8c-8cc0-40b9-8cb2-9cb46deba6be
-
-
-
-{}
