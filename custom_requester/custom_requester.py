@@ -4,8 +4,7 @@ from enums.hosts import BASE_URL
 class CustomRequester:
     base_headers = dict({'Content-Type': 'application/json', 'Accept': 'application/json'})
 
-    def __init__(self, session: requests.Session):
-        self.session = session
+    def __init__(self):
         self.base_url = BASE_URL
 
     def send_request(self, method, endpoint, data=None, expected_status=200):

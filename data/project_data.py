@@ -47,3 +47,11 @@ class BuildConfData:
                     ]
                 }
             }
+    
+class RunBuildData:
+    def __init__(self, build_id):
+        pass
+
+    @staticmethod
+    def run_build_data(build_id):
+        return {"buildType": {"id": build_id}}
