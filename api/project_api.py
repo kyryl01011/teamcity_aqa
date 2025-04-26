@@ -4,6 +4,8 @@ from custom_requester.custom_requester import CustomRequester
 
 
 class ProjectAPI(CustomRequester):
+    def get_project_by_locator(self, locator):
+        return self.send_request("GET", f"/app/rest/projects/{locator}")
 
     def create_project(self, project_data, expected_status_code=HTTPStatus.OK):
         return self.send_request('POST', '/app/rest/projects', project_data, expected_status_code)

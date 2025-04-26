@@ -1,5 +1,6 @@
 
 
+from api.api_manager import APIManager
 from enums.roles import Roles
 
 
@@ -12,12 +13,12 @@ class Role:
         self.href = href
 
 class User:
-    def __init__(self, username: str, password: str, email: str, roles: list, api_object: object, **kwargs):
+    def __init__(self, username: str, password: str, email: str, roles: list, api_manager: APIManager, **kwargs):
         self.username = username
         self.password = password
         self.email = email
         self.roles = roles
-        self.api_object = api_object # requests.Session (APIManager) object to work with
+        self.api_manager = api_manager # requests.Session (APIManager) object to work with
         self.groups = None
 
     @property
