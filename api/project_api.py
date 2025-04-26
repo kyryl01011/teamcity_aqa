@@ -4,9 +4,6 @@ from custom_requester.custom_requester import CustomRequester
 
 
 class ProjectAPI(CustomRequester):
-    def __init__(self, session):
-        super().__init__()
-        self.session = session
 
     def create_project(self, project_data, expected_status_code=HTTPStatus.OK):
         return self.send_request('POST', '/app/rest/projects', project_data, expected_status_code)

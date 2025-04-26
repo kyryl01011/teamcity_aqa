@@ -18,3 +18,7 @@ class GenerateData:
     @staticmethod
     def fake_name():
         return fake.word()
+    
+    @staticmethod
+    def fake_email():
+        return fake.email()
