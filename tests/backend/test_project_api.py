@@ -44,3 +44,5 @@ class TestCreateProject:
         project_user.api_object.auth_api.auth_api(project_user.creds)
         create_project_response = project_user.api_object.project_api.create_project(self.project_data).json()
         assert create_project_response.get('id', {}) == self.project_id, f'Expected {self.project_id} but got {create_project_response}'
+
+    #check git
