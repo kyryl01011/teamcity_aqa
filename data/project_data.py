@@ -1,5 +1,4 @@
-from typing import Optional
-
+from typing import List, Optional, Dict
 from pydantic import BaseModel
 
 from utils.data_generator import GenerateData
@@ -60,45 +59,54 @@ class ProjectData:
                copyAllAssociatedSettings = True
         )
 
-    
-class BuildConfData:
-    def __init__(self, project_id):
-        pass
 
-    @staticmethod
-    def create_build_conf_data(project_id):
-        return {
-                "id": GenerateData.fake_project_id(),
-                "name": GenerateData.fake_name(),
-                "project": {
-                    "id": project_id
-                },
-                "steps": {
-                    "step": [
-                        {
-                            "name": "myCommandLineStep",
-                            "type": "simpleRunner",
-                            "properties": {
-                                "property": [
-                                    {
-                                        "name": "script.content",
-                                        "value": "echo 'Hello World!'"
-                                    },
-                                    {
-                                        "name": "teamcity.step.mode",
-                                        "value": "default"
-                                    },
-                                    {
-                                        "name": "use.custom.script",
-                                        "value": "true"
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
+# class BuildConfData:
+#     def __init__(self, project_id):
+#         pass
+
+#     @staticmethod
+#     def create_build_conf_data(project_id):
+#         return {
+#                 "id": GenerateData.fake_project_id(),
+#                 "name": GenerateData.fake_name(),
+#                 "project": {
+#                     "id": project_id
+#                 },
+#                 "steps": {
+#                     "step": [
+#                         {
+#                             "name": "myCommandLineStep",
+#                             "type": "simpleRunner",
+#                             "properties": {
+#                                 "property": [
+#                                     {
+#                                         "name": "script.content",
+#                                         "value": "echo 'Hello World!'"
+#                                     },
+#                                     {
+#                                         "name": "teamcity.step.mode",
+#                                         "value": "default"
+#                                     },
+#                                     {
+#                                         "name": "use.custom.script",
+#                                         "value": "true"
+#                                     }
+#                                 ]
+#                             }
+#                         }
+#                     ]
+#                 }
+#             }
     
+
+### Pydantic Rub Build Data Block
+
+class BuildTypeModel(BaseModel):
+    id: str
+
+class RunBuildDataModel(BaseModel):
+    buildType: BuildTypeModel
+
 class RunBuildData:
     def __init__(self, build_id):
         pass

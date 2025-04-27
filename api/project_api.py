@@ -10,6 +10,9 @@ class ProjectAPI(CustomRequester):
     def create_project(self, project_data, expected_status_code=HTTPStatus.OK):
         return self.send_request('POST', '/app/rest/projects', project_data, expected_status_code)
 
+    def create_build_conf(self, build_conf_data, expected_status_code=HTTPStatus.OK):
+        return self.send_request('POST', '/app/rest/buildTypes', build_conf_data, expected_status_code)
+
     def get_projects(self):
         return self.send_request('GET', '/app/rest/projects')
 

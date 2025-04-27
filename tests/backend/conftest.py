@@ -2,6 +2,7 @@ import pytest
 import requests
 
 from api.api_manager import APIManager
+from data.build_conf_data import BuildConfDataModel, BuildConfData
 from data.project_data import ProjectData
 from data.user_data import UserData
 from entities.user import Role, User
@@ -18,8 +19,15 @@ def project_data(super_admin):
 
     yield _create_project_data
 
-    for project_id in created_projects_ids_pool:
-        super_admin.api_manager.project_api.clean_up_project(project_id)
+    # for project_id in created_projects_ids_pool:
+    #     super_admin.api_manager.project_api.clean_up_project(project_id)
+
+@pytest.fixture
+def build_conf_data():
+    def _create_build_conf_data(project_id):
+        build_conf_data = BuildConfData.create_build_conf_data(project_id)
+        return build_conf_data
+    return _create_build_conf_data
 
 @pytest.fixture
 def user_session():
