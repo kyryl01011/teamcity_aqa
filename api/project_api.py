@@ -13,6 +13,9 @@ class ProjectAPI(CustomRequester):
     def create_build_conf(self, build_conf_data, expected_status_code=HTTPStatus.OK):
         return self.send_request('POST', '/app/rest/buildTypes', build_conf_data, expected_status_code)
 
+    def run_build_conf(self, run_conf_data, expected_status_code=HTTPStatus.OK):
+        return self.send_request('POST', '/app/rest/buildQueue', run_conf_data, expected_status_code)
+
     def get_projects(self):
         return self.send_request('GET', '/app/rest/projects')
 

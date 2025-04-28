@@ -44,7 +44,7 @@ class TestCreateProject:
     @allure.feature('Manage projects')
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.link('https://www.jetbrains.com/help/teamcity/rest/create-and-delete-build-configurations.html', name='documentation')
-    def test_create_project_build_conf_as_user(self, super_admin, user_create, project_data, build_conf_data):
+    def test_create_project_build_conf_as_user(self, super_admin, user_create, project_data, build_conf_data, run_build_data):
         ### Create new project with freshly generated user and fake project data
         with allure.step('Create new test user, project data, build conf data and build run data'):
             new_user = user_create(Roles.PROJECT_ADMIN.value)
@@ -63,5 +63,7 @@ class TestCreateProject:
         with allure.step(f'Check if {fake_build_conf_data.id} equals {build_conf_response.id}'):
             assert fake_build_conf_data.id == build_conf_response.id, f'Generated build conf id: {fake_build_conf_data.id} not equals to responded build conf id: {build_conf_response.id}'
         ### Run created build configuration
-        with allure.step(f'Test run created project build configuration with id: {build_conf_response.id}'):
-            pass
+        with allure.step(f'Test creation and run created project build configuration with id: {build_conf_response.id}'):
+            fake_run_build_data = run_build_data(fake_build_conf_data.id)
+            run_build_conf_response = new_user.api_manager.project_api.run_build_conf(fake_run_build_data.model_dump()).text
+            print(run_build_conf_response)

@@ -98,19 +98,3 @@ class ProjectData:
 #                 }
 #             }
     
-
-### Pydantic Rub Build Data Block
-
-class BuildTypeModel(BaseModel):
-    id: str
-
-class RunBuildDataModel(BaseModel):
-    buildType: BuildTypeModel
-
-class RunBuildData:
-    def __init__(self, build_id):
-        pass
-
-    @staticmethod
-    def run_build_data(build_id):
-        return {"buildType": {"id": build_id}}

@@ -4,6 +4,7 @@ import requests
 from api.api_manager import APIManager
 from data.build_conf_data import BuildConfDataModel, BuildConfData
 from data.project_data import ProjectData
+from data.rub_build_data import RunBuildData
 from data.user_data import UserData
 from entities.user import Role, User
 from resources.user_creds import SuperAdminCreds
@@ -28,6 +29,13 @@ def build_conf_data():
         build_conf_data = BuildConfData.create_build_conf_data(project_id)
         return build_conf_data
     return _create_build_conf_data
+
+@pytest.fixture
+def run_build_data():
+    def _create_run_build_data(build_id):
+        run_build_data = RunBuildData.create_run_build_data(build_id)
+        return run_build_data
+    return _create_run_build_data
 
 @pytest.fixture
 def user_session():
