@@ -1,5 +1,6 @@
 import pytest
 import requests
+from playwright.sync_api import Page, sync_playwright
 
 from api.api_manager import APIManager
 from data.build_conf_data import BuildConfDataModel, BuildConfData
@@ -7,6 +8,7 @@ from data.project_data import ProjectData
 from data.rub_build_data import RunBuildData
 from data.user_data import UserData
 from entities.user import Role, User
+from pages.login_page import LoginPage
 from resources.user_creds import SuperAdminCreds
 
 @pytest.fixture
@@ -75,3 +77,31 @@ def user_create(user_session, super_admin: User):
 
     for username in created_users_pool:
         super_admin.api_manager.user_api.delete_user(username)
+
+
+
+### UI Fixtures
+
+@pytest.fixture
+def browser(scope='session'):
+    playwright = sync_playwright().start()
+    browser = playwright.chromium.launch(headless=False, slow_mo=1000)
+    yield browser
+    browser.close()
+    playwright.stop()
+
+@pytest.fixture
+def page(browser):
+    page = browser.new_page()
+    yield page
+    page.close()
+
+@pytest.fixture
+def authorized_user(page: Page, super_admin: User):
+    username, password = super_admin.creds
+    login_page = LoginPage(page)
+    login_page.go_to_login_page()
+    login_page.fill_login_from(username, password)
+    login_page.log_in()
+    login_page.header.check_login()
+    return login_page
