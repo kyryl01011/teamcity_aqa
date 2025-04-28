@@ -1,0 +1,80 @@
+2025-04-28 12:15:31 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_build_conf_as_user (setup)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic OjgzMzM0NDYyMjY5Njk4NzEyNzY= \
+-d ''
+2025-04-28 12:15:31 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_build_conf_as_user[0m
+curl -X POST 'http://localhost:8111/app/rest/users' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:a2a50a7e-5128-4ea4-8b95-a07c80c03ba1\
+-H Cookie:TCSESSIONID=71EADAC522529180C12E9E8BB806F1A8; RecentLogin=\
+-H Content-Length:153\
+-H Authorization:Basic OjgzMzM0NDYyMjY5Njk4NzEyNzY= \
+-d '{"username": "whatever", "password": "uhDAFrI1SWF", "email": "morrisondiana@example.org", "roles": {"role": [{"roleId": "PROJECT_ADMIN", "scope": "g"}]}}' 
+
+2025-04-28 12:15:31 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_build_conf_as_user[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic d2hhdGV2ZXI6dWhEQUZySTFTV0Y= \
+-d '' 
+
+2025-04-28 12:15:31 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_build_conf_as_user[0m
+curl -X POST 'http://localhost:8111/app/rest/projects' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:177564fd-3578-4a00-9fa6-b982dc02a21c\
+-H Cookie:TCSESSIONID=EAEF3E5181F8C251BF37B4A6BCD8B5D4; RecentLogin=\
+-H Content-Length:116\
+-H Authorization:Basic d2hhdGV2ZXI6dWhEQUZySTFTV0Y= \
+-d '{"parentProject": {"locator": "_Root"}, "name": "situation", "id": "vDm8azL0lWU", "copyAllAssociatedSettings": true}' 
+
+2025-04-28 12:15:31 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_build_conf_as_user[0m
+curl -X POST 'http://localhost:8111/app/rest/buildTypes' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:177564fd-3578-4a00-9fa6-b982dc02a21c\
+-H Cookie:TCSESSIONID=EAEF3E5181F8C251BF37B4A6BCD8B5D4\
+-H Content-Length:310\
+-H Authorization:Basic d2hhdGV2ZXI6dWhEQUZySTFTV0Y= \
+-d '{"id": "bv2wmk3sWHN", "name": "majority", "project": {"id": "vDm8azL0lWU"}, "steps": {"name": "worker", "type": "true", "properties": {"property": [{"name": "script.content", "value": "echo 'Hello World!'"}, {"name": "teamcity.step.mode", "value": "default"}, {"name": "use.custom.script", "value": "true"}]}}}' 
+
+2025-04-28 12:15:31 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_build_conf_as_user[0m
+curl -X POST 'http://localhost:8111/app/rest/buildQueue' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:177564fd-3578-4a00-9fa6-b982dc02a21c\
+-H Cookie:TCSESSIONID=EAEF3E5181F8C251BF37B4A6BCD8B5D4\
+-H Content-Length:36\
+-H Authorization:Basic d2hhdGV2ZXI6dWhEQUZySTFTV0Y= \
+-d '{"buildType": {"id": "bv2wmk3sWHN"}}'
+2025-04-28 12:15:31 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_build_conf_as_user (teardown)[0m
+curl -X DELETE 'http://localhost:8111/app/rest/users/whatever' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:a2a50a7e-5128-4ea4-8b95-a07c80c03ba1\
+-H Cookie:TCSESSIONID=71EADAC522529180C12E9E8BB806F1A8\
+-H Content-Length:0\
+-H Authorization:Basic OjgzMzM0NDYyMjY5Njk4NzEyNzY= \
+-d ''

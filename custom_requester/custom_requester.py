@@ -1,4 +1,6 @@
 import os
+
+import allure
 import requests
 from enums.hosts import BASE_URL
 import logging
@@ -12,18 +14,20 @@ class CustomRequester:
         self.logger = logging.getLogger(__name__)
 
     def send_request(self, method, endpoint, data=None, expected_status=200, need_logging=True):
-        url = self.base_url + endpoint
-        response = self.session.request(method, url, json=data)
-        if need_logging:
-            self.log_request_and_response(response)
-        if response.status_code != expected_status:
-            raise ValueError(f'Unexpected status code: {response.status_code}')
-        return response
+        with allure.step(f'Sending {method} request to {self.base_url + endpoint} with data: {data}, expected_status: {expected_status}'):
+            url = self.base_url + endpoint
+            response = self.session.request(method, url, json=data)
+            if need_logging:
+                self.log_request_and_response(response)
+            if response.status_code != expected_status:
+                raise ValueError(f'Unexpected status code: {response.status_code}')
+            return response
     
     def _update_session_headers(self, **kwargs):
-        self.headers = self.base_headers.copy()
-        self.headers.update(**kwargs)
-        self.session.headers.update(self.headers)
+        with allure.step(f'Updating session headers: {kwargs}'):
+            self.headers = self.base_headers.copy()
+            self.headers.update(**kwargs)
+            self.session.headers.update(self.headers)
 
     def log_request_and_response(self, response):
         try:

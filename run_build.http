@@ -15,14 +15,16 @@ Accept: application/json
 POST http://admin:admin@localhost:8111/app/rest/buildTypes
 Content-Type: application/json
 Accept: application/json
-X-TC-CSRF-Token: 82dc6294-c9b2-4b39-b073-c4cc0b8c7128
+X-TC-CSRF-Token: b23419b9-061a-4c73-912e-37eb55d65542
+
 
 
 ### 1. Create Project
 POST http://admin:admin@localhost:8111/app/rest/projects
 Content-Type: application/json
 Accept: application/json
-X-TC-CSRF-Token: a7d1cf0a-c1d4-42f7-aca7-371afb6f0dcb
+X-TC-CSRF-Token: b23419b9-061a-4c73-912e-37eb55d65542
+
 
 {
     "parentProject": {
@@ -38,7 +40,8 @@ X-TC-CSRF-Token: a7d1cf0a-c1d4-42f7-aca7-371afb6f0dcb
 POST http://admin:admin@localhost:8111/app/rest/buildTypes
 Content-Type: application/json
 Accept: application/json
-X-TC-CSRF-Token: 001eef37-3d74-4a5d-a256-2b73a8498ab5
+X-TC-CSRF-Token: b23419b9-061a-4c73-912e-37eb55d65542
+
 
 {
     "id": "BuildConfId",

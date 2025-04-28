@@ -20,8 +20,8 @@ def project_data(super_admin):
 
     yield _create_project_data
 
-    # for project_id in created_projects_ids_pool:
-    #     super_admin.api_manager.project_api.clean_up_project(project_id)
+    for project_id in created_projects_ids_pool:
+        super_admin.api_manager.project_api.clean_up_project(project_id)
 
 @pytest.fixture
 def build_conf_data():
