@@ -91,15 +91,15 @@ def browser(scope='session'):
     playwright.stop()
 
 @pytest.fixture
-def page(browser):
+def new_page(browser):
     page = browser.new_page()
     yield page
     page.close()
 
 @pytest.fixture
-def authorized_user(page: Page, super_admin: User):
+def authorized_user(new_page: Page, super_admin: User):
     username, password = super_admin.creds
-    login_page = LoginPage(page)
+    login_page = LoginPage(new_page)
     login_page.go_to_login_page()
     login_page.fill_login_from(username, password)
     login_page.log_in()

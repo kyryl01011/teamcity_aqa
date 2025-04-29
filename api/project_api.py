@@ -7,7 +7,7 @@ from custom_requester.custom_requester import CustomRequester
 
 class ProjectAPI(CustomRequester):
     def get_project_by_locator(self, locator):
-        return self.send_request("GET", f"/app/rest/projects/{locator}")
+        return self.send_request("GET", f"/app/rest/projects/id:{locator}")
 
     def create_project(self, project_data, expected_status_code=HTTPStatus.OK):
         with allure.step(f'Create project with data: {project_data}'):

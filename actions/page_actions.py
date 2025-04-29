@@ -41,3 +41,7 @@ class PageActions:
     def assert_selector_visible(self, selector):
         with allure.step(f'Check if selector "{selector}" is visible on page'):
             expect(self.page.locator(selector)).to_be_visible()
+
+    def assert_selector_attribute_has_value(self, selector, attribute, value):
+        with allure.step(f'Check if attribute {attribute} of selector "{selector}" has value: "{value}"'):
+            expect(self.page.locator(selector)).to_have_attribute(name=attribute, value=value)

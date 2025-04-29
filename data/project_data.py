@@ -16,9 +16,17 @@ class ParentProjectModel(BaseModel):
     href: str
     webUrl: str
 
+class BuildTypeModel(BaseModel):
+    id: str
+    name: str
+    projectName: str
+    projectId: str
+    href: str
+    webUrl: str
+
 class BuildTypes(BaseModel):
     count: int
-    buildType: list = []
+    buildType: List[BuildTypeModel] = []
 
 class Templates(BaseModel):
     count: int

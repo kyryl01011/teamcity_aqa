@@ -6,9 +6,9 @@ class LoginPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
         self._endpoint = '/login.html'
-        self.username_input = self.page.get_by_role("textbox", name="Username")
-        self.password_input = self.page.get_by_role("textbox", name="Password")
-        self.login_button = self.page.get_by_role("button", name="Log in")
+        self.username_input = 'input#username'
+        self.password_input = 'input#password'
+        self.login_button = 'input[name="submitLogin"]'
 
     def go_to_login_page(self):
         self.actions.go_to_url(self._get_url(self._endpoint))
