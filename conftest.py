@@ -3,7 +3,7 @@ import requests
 from playwright.sync_api import Page, sync_playwright
 
 from api.api_manager import APIManager
-from data.build_conf_data import BuildConfDataModel, BuildConfData
+from data.build_conf_data import BuildConfData
 from data.project_data import ProjectData
 from data.rub_build_data import RunBuildData
 from data.user_data import UserData
@@ -44,8 +44,8 @@ def user_session():
     user_pool = []
 
     def _create_user_session():
-        session = requests.Session()
-        user_session = APIManager(session)
+        new_session = requests.Session()
+        user_session = APIManager(new_session)
         user_pool.append(user_session)
         return user_session
     
@@ -85,7 +85,7 @@ def user_create(user_session, super_admin: User):
 @pytest.fixture
 def browser(scope='session'):
     playwright = sync_playwright().start()
-    browser = playwright.chromium.launch(headless=False, slow_mo=1000)
+    browser = playwright.chromium.launch(headless=False)
     yield browser
     browser.close()
     playwright.stop()

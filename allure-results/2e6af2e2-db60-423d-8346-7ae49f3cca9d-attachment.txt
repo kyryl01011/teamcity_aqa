@@ -1,0 +1,44 @@
+2025-04-30 19:00:06 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_as_super_admin (setup)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic Ojg4MzI0Mzg1Mzk0ODg3NDcwNTc= \
+-d ''
+2025-04-30 19:00:06 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_as_super_admin[0m
+curl -X POST 'http://localhost:8111/app/rest/projects' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:05ef4318-e843-4e5c-bf25-2022316c0fb4\
+-H Cookie:TCSESSIONID=93F0D408B0493A1D2D5314492C3F3270; RecentLogin=\
+-H Content-Length:111\
+-H Authorization:Basic Ojg4MzI0Mzg1Mzk0ODg3NDcwNTc= \
+-d '{"parentProject": {"locator": "_Root"}, "name": "time", "id": "ZtWPT2j1Vil", "copyAllAssociatedSettings": true}'
+2025-04-30 19:00:06 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_as_super_admin (teardown)[0m
+curl -X DELETE 'http://localhost:8111/app/rest/projects/id:ZtWPT2j1Vil' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:05ef4318-e843-4e5c-bf25-2022316c0fb4\
+-H Cookie:TCSESSIONID=93F0D408B0493A1D2D5314492C3F3270\
+-H Content-Length:0\
+-H Authorization:Basic Ojg4MzI0Mzg1Mzk0ODg3NDcwNTc= \
+-d '' 
+
+2025-04-30 19:00:06 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestCreateProject::test_create_project_as_super_admin (teardown)[0m
+curl -X GET 'http://localhost:8111/app/rest/projects' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:05ef4318-e843-4e5c-bf25-2022316c0fb4\
+-H Cookie:TCSESSIONID=93F0D408B0493A1D2D5314492C3F3270\
+-H Authorization:Basic Ojg4MzI0Mzg1Mzk0ODg3NDcwNTc= \
+-d ''

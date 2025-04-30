@@ -34,6 +34,10 @@ class PageActions:
         with allure.step(f'Type selector: "{selector}" with text: "{text}"'):
             self.page.type(selector, text)
 
+    def get_attribute_value_of_selector(self, selector, attribute_key):
+        with allure.step(f'Get value of attribute: {attribute_key} from selector: {selector}'):
+            return self.page.locator(selector).get_attribute(attribute_key)
+
     def assert_selector_contains_text(self, selector, text):
         with allure.step(f'Check if selector "{selector}" contains text: "{text}"'):
             expect(self.page.locator(selector)).to_contain_text(text)

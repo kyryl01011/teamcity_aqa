@@ -1,15 +1,15 @@
 import allure
-
-from pages.base_page import BasePage
 from pages.build_conf_creation_page import BuildConfCreationPage
+from pages.build_conf_page import BuildConfPage
 from pages.create_project_page import CreateProjectPage
+from pages.launched_build_page import LaunchedBuildPage
 from pages.projects_page import ProjectsPage
 from data.project_data import ProjectResponseModel
 
-@allure.title('Full user story test-case as generated user UI')
-@allure.description('Create new user, project, build configuration and run it as new user UI')
-@allure.story('Full user story case UI')
-@allure.feature('Manage projects UI')
+@allure.title('Full user story test-case as super admin | UI')
+@allure.description('Create new user, project, build configuration and run it | UI')
+@allure.story('Full user story case | UI')
+@allure.feature('Manage projects | UI')
 @allure.severity(allure.severity_level.CRITICAL)
 @allure.link('https://www.jetbrains.com/help/teamcity/rest/teamcity-rest-api-documentation.html', name='documentation')
 def test_create_project_manually_with_ui(authorized_user, project_data, build_conf_data, super_admin):
@@ -36,9 +36,16 @@ def test_create_project_manually_with_ui(authorized_user, project_data, build_co
     with allure.step(f'Check if build configuration with fake build conf id: {fake_build_conf_data.id} was created'):
         get_created_project_response = super_admin.api_manager.project_api.get_project_by_locator(fake_project_data.id).text
         created_project_response = ProjectResponseModel.model_validate_json(get_created_project_response)
+        # Эта проверка тоже работает, но нижняя более гибкая
         # created_build_conf_id = created_project_response.buildTypes.buildType[0].id
-        # assert created_build_conf_id == fake_build_conf_data.id, f'Got unexpected build conf id: {created_build_conf_id}, expected generated build conf id: {fake_build_conf_data.id}' # Эта тоже работает, но нижняя более гибкая
+        # assert created_build_conf_id == fake_build_conf_data.id, f'Got unexpected build conf id: {created_build_conf_id}, expected generated build conf id: {fake_build_conf_data.id}'
         all_project_builds = created_project_response.buildTypes.buildType
         assert [True for build in all_project_builds if build.id == fake_build_conf_data.id]
-
-        authorized_user.page.pause()
+    with allure.step(f'Run created build with id: {fake_build_conf_data.id}'):
+        build_conf_page = BuildConfPage(authorized_user.page, fake_build_conf_data.id)
+        build_conf_page.go_to_build_conf_page()
+        build_conf_page.click_run_build_button()
+    with allure.step(f'Go to last launched build and wait for success'):
+        launched_build_id = build_conf_page.go_to_launched_build_url()
+        launched_build_page = LaunchedBuildPage(authorized_user.page, fake_build_conf_data.id, launched_build_id)
+        launched_build_page.wait_for_success()

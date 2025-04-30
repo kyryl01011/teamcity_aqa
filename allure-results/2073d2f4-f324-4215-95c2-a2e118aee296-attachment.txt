@@ -1,0 +1,55 @@
+2025-04-30 18:59:38 [32mINFO[0m [32mpytest tests/frontend/test_project_ui.py::test_create_project_manually_with_ui (setup)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic Ojg4MzI0Mzg1Mzk0ODg3NDcwNTc= \
+-d ''
+2025-04-30 18:59:42 [32mINFO[0m [32mpytest tests/frontend/test_project_ui.py::test_create_project_manually_with_ui[0m
+curl -X GET 'http://localhost:8111/app/rest/projects/id:jkfyo5mpncP' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:6ac505f7-509f-4f50-8d96-27133484e37c\
+-H Cookie:TCSESSIONID=262AD1F1F631EBDFBC1E6F7083041EE9; RecentLogin=\
+-H Authorization:Basic Ojg4MzI0Mzg1Mzk0ODg3NDcwNTc= \
+-d '' 
+
+2025-04-30 18:59:43 [32mINFO[0m [32mpytest tests/frontend/test_project_ui.py::test_create_project_manually_with_ui[0m
+curl -X GET 'http://localhost:8111/app/rest/projects/id:jkfyo5mpncP' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:6ac505f7-509f-4f50-8d96-27133484e37c\
+-H Cookie:TCSESSIONID=262AD1F1F631EBDFBC1E6F7083041EE9\
+-H Authorization:Basic Ojg4MzI0Mzg1Mzk0ODg3NDcwNTc= \
+-d ''
+2025-04-30 19:00:01 [32mINFO[0m [32mpytest tests/frontend/test_project_ui.py::test_create_project_manually_with_ui (teardown)[0m
+curl -X DELETE 'http://localhost:8111/app/rest/projects/id:jkfyo5mpncP' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:6ac505f7-509f-4f50-8d96-27133484e37c\
+-H Cookie:TCSESSIONID=262AD1F1F631EBDFBC1E6F7083041EE9\
+-H Content-Length:0\
+-H Authorization:Basic Ojg4MzI0Mzg1Mzk0ODg3NDcwNTc= \
+-d '' 
+
+2025-04-30 19:00:01 [32mINFO[0m [32mpytest tests/frontend/test_project_ui.py::test_create_project_manually_with_ui (teardown)[0m
+curl -X GET 'http://localhost:8111/app/rest/projects' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:6ac505f7-509f-4f50-8d96-27133484e37c\
+-H Cookie:TCSESSIONID=262AD1F1F631EBDFBC1E6F7083041EE9\
+-H Authorization:Basic Ojg4MzI0Mzg1Mzk0ODg3NDcwNTc= \
+-d ''
