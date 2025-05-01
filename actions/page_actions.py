@@ -18,9 +18,9 @@ class PageActions:
         with allure.step(f'Click selector: "{selector}"'):
             self.page.click(selector)
 
-    def wait_selector(self, selector):
+    def wait_selector(self, selector, timeout=30000):
         with allure.step(f'Wait for selector: "{selector}"'):
-            self.page.wait_for_selector(selector)
+            self.page.wait_for_selector(selector, timeout=timeout)
 
     def wait_page_load(self):
         with allure.step(f'Wait page to load: "{self.page.url}"'):
