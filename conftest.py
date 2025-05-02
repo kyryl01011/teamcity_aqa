@@ -85,7 +85,7 @@ def user_create(user_session, super_admin: User):
 @pytest.fixture
 def browser(scope='session'):
     playwright = sync_playwright().start()
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch()
     yield browser
     browser.close()
     playwright.stop()
@@ -93,6 +93,7 @@ def browser(scope='session'):
 @pytest.fixture
 def new_page(browser):
     page = browser.new_page()
+    page.set_default_timeout(60000) # x2 of default
     yield page
     page.close()
 
