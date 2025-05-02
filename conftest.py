@@ -22,6 +22,7 @@ def project_data(super_admin):
 
     yield _create_project_data
 
+    super_admin.api_manager.auth_api.auth_and_get_csrf_token(super_admin.creds)
     for project_id in created_projects_ids_pool:
         super_admin.api_manager.project_api.clean_up_project(project_id)
 
