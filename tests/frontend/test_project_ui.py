@@ -22,7 +22,7 @@ def test_create_project_manually_with_ui(authorized_user, project_data, build_co
         create_project_page = CreateProjectPage(authorized_user.page)
         create_project_page.create_project_manually(fake_project_data.name, fake_project_data.id)
     with allure.step(f'Check if project with id: {fake_project_data.id} was created'):
-        get_created_project_response = super_admin.api_manager.project_api.get_project_by_locator(fake_project_data.id)
+        get_created_project_response = super_admin.api_manager.project_api.get_project_by_locator(fake_project_data.id, retries=5)
         assert get_created_project_response.ok, f'Unexpected status code: {get_created_project_response.status_code}, failed to get new project with id: {fake_project_data.id}'
     with allure.step(f'Generate fake build conf data for project with id: {fake_project_data.id}'):
         build_conf_creation_page = BuildConfCreationPage(authorized_user.page, fake_project_data.id)
@@ -34,7 +34,7 @@ def test_create_project_manually_with_ui(authorized_user, project_data, build_co
         build_conf_creation_page.creation_form.click_create_build_conf_button()
         build_conf_creation_page.wait_for_successful_build_conf_creation()
     with allure.step(f'Check if build configuration with fake build conf id: {fake_build_conf_data.id} was created'):
-        get_created_project_response = super_admin.api_manager.project_api.get_project_by_locator(fake_project_data.id).text
+        get_created_project_response = super_admin.api_manager.project_api.get_project_by_locator(fake_project_data.id, retries=5).text
         created_project_response = ProjectResponseModel.model_validate_json(get_created_project_response)
         # Эта проверка тоже работает, но нижняя более гибкая
         # created_build_conf_id = created_project_response.buildTypes.buildType[0].id

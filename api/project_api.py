@@ -1,3 +1,4 @@
+import time
 from http import HTTPStatus
 
 import allure
@@ -6,8 +7,18 @@ from custom_requester.custom_requester import CustomRequester
 
 
 class ProjectAPI(CustomRequester):
-    def get_project_by_locator(self, locator):
-        return self.send_request("GET", f"/app/rest/projects/id:{locator}")
+    def get_project_by_locator(self, locator, retries=1):
+        with allure.step(f'Check if project with locator: {locator} exists on server with {retries} retries'):
+            for attempt in range(retries + 1):
+                try:
+                    response = self.send_request("GET", f"/app/rest/projects/id:{locator}")
+                    return response
+                except ValueError as e:
+                    if attempt <= retries:
+                        time.sleep(1)
+                        continue
+                    else:
+                        raise e
 
     def create_project(self, project_data, expected_status_code=HTTPStatus.OK):
         with allure.step(f'Create project with data: {project_data}'):

@@ -45,6 +45,7 @@ class CreateProjectPage(BasePage):
         self._endpoint = '/admin/createObjectMenu.html?projectId=_Root&showMode=createProjectMenu'
         self.creation_methods = CreationMethodsFragment(page)
         self.project_creation_form = ProjectCreationFormFragment(page)
+        self.project_creation_confirmation_message_selector = 'div.successMessage'
 
     def create_project_manually(self, proj_name, proj_id, proj_desc=''):
         with allure.step('Create project manually'):

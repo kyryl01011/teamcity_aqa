@@ -83,10 +83,10 @@ def user_create(user_session, super_admin: User):
 
 ### UI Fixtures
 
-@pytest.fixture
-def browser(scope='session'):
+@pytest.fixture(scope='session')
+def browser():
     playwright = sync_playwright().start()
-    browser = playwright.chromium.launch()
+    browser = playwright.chromium.launch(headless=False)
     yield browser
     browser.close()
     playwright.stop()
