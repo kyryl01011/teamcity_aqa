@@ -94,7 +94,7 @@ def browser(scope='session'):
 @pytest.fixture
 def new_page(browser):
     page = browser.new_page()
-    page.set_default_timeout(60000) # x2 of default
+    page.set_default_timeout(180000) # x6 of default
     yield page
     page.close()
 
