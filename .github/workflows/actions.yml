@@ -83,6 +83,7 @@ jobs:
           done
           if [ $timeout -le 0 ]; then
             echo "Failed to retrieve super user token within timeout period."
+          fi
 
         shell: /usr/bin/bash -e {0}
 
