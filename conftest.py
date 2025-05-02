@@ -94,7 +94,7 @@ def browser():
 @pytest.fixture
 def new_page(browser):
     page = browser.new_page()
-    page.set_default_timeout(180000) # x6 of default
+    page.set_default_timeout(300000) # for free gh actions
     yield page
     page.close()
 
