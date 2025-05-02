@@ -24,7 +24,7 @@ jobs:
 
       - name: Run TeamCity Server Container
         run: |
-          docker run -d --name teamcity-server-instance -v ${{ github.workspace }}/logs:/opt/teamcity/logs -p 8111:8111 jetbrains/teamcity-server-instace
+          docker run -d --name teamcity-server-instance -v ${{ github.workspace }}/logs:/opt/teamcity/logs -p 8111:8111 jetbrains/teamcity-server-instance
           echo "Waiting for teamcity server to start..."
           for i in {1..30}; do
             if docker logs teamcity-server-instance 2>&1 | grep -q "TeamCity process PID is";
@@ -64,7 +64,7 @@ jobs:
         run: |
           pytest -v ./tests/frontend/test_set_up.py
 
-      - name: Retreive Super Admin Token
+      - name: Retrieve Super Admin Token
         run: |
           timeout = 180
           while [ $timeout -gt 0]; do
