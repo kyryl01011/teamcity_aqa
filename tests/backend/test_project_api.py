@@ -41,14 +41,13 @@ class TestProjectManagement:
         with allure.step(f'Check if project {fake_project_data.parentProject['locator']} == {project_response.parentProjectId}'):
             assert project_response.parentProjectId == fake_project_data.parentProject['locator'], f'Expected {fake_project_data.parentProject['locator']} but got {project_response.parentProjectId}'
 
-    @allure.title('Full user story test-case as generated user')
-    @allure.description('Create new user, project, build configuration and run it as new user')
-    @allure.story('Full user story case')
+    @allure.title('Create project as generated user')
+    @allure.description('Super-admin creates new user, new user creates project and verify it exists')
+    @allure.story('As project admin create project')
     @allure.feature('Manage projects')
     @allure.severity(allure.severity_level.CRITICAL)
-    @allure.link('https://www.jetbrains.com/help/teamcity/rest/teamcity-rest-api-documentation.html', name='documentation')
-    def test_create_project_build_conf_as_user(self, super_admin, user_create, project_data, build_conf_data, run_build_data):
-        # Create new project with freshly generated user and fake project data
+    @allure.link('https://www.jetbrains.com/help/teamcity/rest/create-and-delete-projects.html', name='documentation')
+    def test_successfully_create_project_as_user(self, super_admin, user_create, project_data):
         with allure.step('Create test user with fake user-data, generate fake project data'):
             new_user = user_create(Roles.PROJECT_ADMIN.value)
             new_user.api_manager.auth_api.auth_and_get_csrf_token(new_user.creds)
@@ -58,18 +57,34 @@ class TestProjectManagement:
             project_response = ProjectResponseModel.model_validate_json(create_project_response)
         with allure.step(f'Check if generated fake project ID: "{project_response.id}" equals ID from respond "{fake_project_data.id}"'):
             assert project_response.id == fake_project_data.id, f'Expected {fake_project_data.id} but got {project_response.id}'
+        return project_response, new_user
 
-        # Create build configuration for created project
+    @allure.title('Create project build configuration as generated user')
+    @allure.description('Super-admin creates new user, new user creates project, project build configuration')
+    @allure.story('As project admin create build configuration')
+    @allure.feature('Manage projects')
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.link('https://www.jetbrains.com/help/teamcity/rest/create-and-delete-build-configurations.html', name='documentation')
+    def test_successfully_create_build_conf_as_user(self, super_admin, user_create, project_data, build_conf_data):
+        project_response, new_user = self.test_successfully_create_project_as_user(super_admin, user_create, project_data)
         with allure.step(f'Create build conf for created project {project_response.id}'):
-            fake_build_conf_data = build_conf_data(fake_project_data.id)
+            fake_build_conf_data = build_conf_data(project_response.id)
             create_build_conf_response = new_user.api_manager.project_api.create_build_conf(fake_build_conf_data.model_dump()).text
             build_conf_response = BuildConfDataResponseModel.model_validate_json(create_build_conf_response)
         with allure.step(f'Check if created fake build conf ID: "{fake_build_conf_data.id}" equals ID from respond "{build_conf_response.id}"'):
             assert fake_build_conf_data.id == build_conf_response.id, f'Generated build conf id: {fake_build_conf_data.id} not equals to responded build conf id: {build_conf_response.id}'
+        return build_conf_response, new_user
 
-        # Run created build configuration
+    @allure.title('Run build configuration as generated user')
+    @allure.description('Super-admin creates new user, new user creates project, project build configuration and runs it')
+    @allure.story('As project admin run build configuration')
+    @allure.feature('Manage projects')
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.link('https://www.jetbrains.com/help/teamcity/rest/start-and-cancel-builds.html', name='documentation')
+    def test_successfully_run_build_as_user(self, super_admin, user_create, project_data, run_build_data, build_conf_data):
+        build_conf_response, new_user = self.test_successfully_create_build_conf_as_user(super_admin, user_create, project_data, build_conf_data)
         with allure.step(f'Test run created project build configuration with id: {build_conf_response.id}'):
-            fake_run_build_data = run_build_data(fake_build_conf_data.id)
+            fake_run_build_data = run_build_data(build_conf_response.id)
             run_build_conf_response = new_user.api_manager.project_api.run_build_conf(fake_run_build_data.model_dump()).text
             run_build_response = RunBuildDataResponse.model_validate_json(run_build_conf_response)
         with allure.step(f'Verify that build with create fake id: "{build_conf_response.id}" equals to build conf that was launched: "{run_build_response.buildTypeId}"'):

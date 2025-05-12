@@ -1,3 +1,4 @@
+import allure
 import pytest
 import requests
 from playwright.sync_api import Page, sync_playwright
@@ -17,6 +18,7 @@ def project_data(super_admin):
 
     def _create_project_data():
         project_data = ProjectData.create_project_data()
+        allure.attach(project_data.model_dump(), name='Generated project data', attachment_type=allure.attachment_type.JSON)
         created_projects_ids_pool.append(project_data.id)
         return project_data
 
@@ -30,6 +32,7 @@ def project_data(super_admin):
 def build_conf_data():
     def _create_build_conf_data(project_id):
         build_conf_data = BuildConfData.create_build_conf_data(project_id)
+        allure.attach(build_conf_data.model_dump(), name='Generated project data', attachment_type=allure.attachment_type.JSON)
         return build_conf_data
     return _create_build_conf_data
 
@@ -37,6 +40,7 @@ def build_conf_data():
 def run_build_data():
     def _create_run_build_data(build_id):
         run_build_data = RunBuildData.create_run_build_data(build_id)
+        allure.attach(run_build_data.model_dump(), name='Generated project data', attachment_type=allure.attachment_type.JSON)
         return run_build_data
     return _create_run_build_data
 
