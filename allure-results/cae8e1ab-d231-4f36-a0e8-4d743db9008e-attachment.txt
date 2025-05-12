@@ -1,0 +1,19 @@
+2025-05-12 21:17:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_create_project_as_super_admin (setup)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d ''
+2025-05-12 21:17:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_create_project_as_super_admin (teardown)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:776dfa4f-c264-4106-860f-22a292fcc855\
+-H Cookie:TCSESSIONID=1C7512482DA3DA7AE1D4C7E180CD4A40; RecentLogin=\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d ''

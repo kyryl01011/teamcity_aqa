@@ -18,7 +18,7 @@ def project_data(super_admin):
 
     def _create_project_data():
         project_data = ProjectData.create_project_data()
-        allure.attach(project_data.model_dump(), name='Generated project data', attachment_type=allure.attachment_type.JSON)
+        allure.attach(str(project_data.model_dump()), name='Generated project data', attachment_type=allure.attachment_type.JSON)
         created_projects_ids_pool.append(project_data.id)
         return project_data
 
@@ -32,7 +32,7 @@ def project_data(super_admin):
 def build_conf_data():
     def _create_build_conf_data(project_id):
         build_conf_data = BuildConfData.create_build_conf_data(project_id)
-        allure.attach(build_conf_data.model_dump(), name='Generated project data', attachment_type=allure.attachment_type.JSON)
+        allure.attach(str(build_conf_data.model_dump()), name='Generated project data', attachment_type=allure.attachment_type.JSON)
         return build_conf_data
     return _create_build_conf_data
 
@@ -40,7 +40,7 @@ def build_conf_data():
 def run_build_data():
     def _create_run_build_data(build_id):
         run_build_data = RunBuildData.create_run_build_data(build_id)
-        allure.attach(run_build_data.model_dump(), name='Generated project data', attachment_type=allure.attachment_type.JSON)
+        allure.attach(str(run_build_data.model_dump()), name='Generated project data', attachment_type=allure.attachment_type.JSON)
         return run_build_data
     return _create_run_build_data
 
@@ -90,7 +90,7 @@ def user_create(user_session, super_admin: User):
 @pytest.fixture(scope='session')
 def browser():
     playwright = sync_playwright().start()
-    browser = playwright.chromium.launch(slow_mo=3000)
+    browser = playwright.chromium.launch(headless=False, slow_mo=300)
     yield browser
     browser.close()
     playwright.stop()
@@ -98,7 +98,8 @@ def browser():
 @pytest.fixture
 def new_page(browser):
     page = browser.new_page()
-    page.set_default_timeout(300000) # for free gh actions
+    # set length of default timeout for PW actions / give more time to GitHub Actions free machines
+    page.set_default_timeout(30000)
     yield page
     page.close()
 

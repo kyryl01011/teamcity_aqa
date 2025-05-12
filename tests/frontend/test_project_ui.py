@@ -6,9 +6,9 @@ from pages.launched_build_page import LaunchedBuildPage
 from pages.projects_page import ProjectsPage
 from data.project_data import ProjectResponseModel
 
-@allure.title('Full user story test-case as super admin | UI')
-@allure.description('Create new user, project, build configuration and run it | UI')
-@allure.story('Full user story case | UI')
+@allure.title('Test create project | UI')
+@allure.description('Create new user, create project as new user | UI')
+@allure.story('Create project | UI')
 @allure.feature('Manage projects | UI')
 @allure.severity(allure.severity_level.CRITICAL)
 @allure.link('https://www.jetbrains.com/help/teamcity/rest/teamcity-rest-api-documentation.html', name='documentation')
@@ -24,10 +24,16 @@ def test_successfully_create_project_manually(authorized_user, project_data, bui
     with allure.step(f'Check if project with id: {fake_project_data.id} was created'):
         get_created_project_response = super_admin.api_manager.project_api.get_project_by_locator(fake_project_data.id, retries=5)
         assert get_created_project_response.ok, f'Unexpected status code: {get_created_project_response.status_code}, failed to get new project with id: {fake_project_data.id}'
-        return fake_project_data.id
+        return fake_project_data
 
-def test_successfully_create_build_conf_data(authorized_user):
-    test_successfully_create_project_manually
+@allure.title('Test create build configuration for project | UI')
+@allure.description('Create new user, project and build configuration | UI')
+@allure.story('Create build configuration | UI')
+@allure.feature('Manage projects | UI')
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.link('https://www.jetbrains.com/help/teamcity/rest/teamcity-rest-api-documentation.html', name='documentation')
+def test_successfully_create_build_conf_data(authorized_user, project_data, build_conf_data, super_admin):
+    fake_project_data = test_successfully_create_project_manually(authorized_user, project_data, build_conf_data, super_admin)
     with allure.step(f'Generate fake build conf data for project with id: {fake_project_data.id}'):
         build_conf_creation_page = BuildConfCreationPage(authorized_user.page, fake_project_data.id)
         fake_build_conf_data = build_conf_data(fake_project_data.id)
@@ -42,6 +48,16 @@ def test_successfully_create_build_conf_data(authorized_user):
         created_project_response = ProjectResponseModel.model_validate_json(get_created_project_response)
         all_project_builds = created_project_response.buildTypes.buildType
         assert [True for build in all_project_builds if build.id == fake_build_conf_data.id]
+    return fake_build_conf_data
+
+@allure.title('Test run build configuration | UI')
+@allure.description('Create new user, project, build configuration and run it | UI')
+@allure.story('Run build configuration')
+@allure.feature('Manage projects | UI')
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.link('https://www.jetbrains.com/help/teamcity/rest/teamcity-rest-api-documentation.html', name='documentation')
+def test_successfully_run_build(authorized_user, project_data, build_conf_data, super_admin):
+    fake_build_conf_data = test_successfully_create_build_conf_data(authorized_user, project_data, build_conf_data, super_admin)
     with allure.step(f'Run created build with id: {fake_build_conf_data.id}'):
         build_conf_page = BuildConfPage(authorized_user.page, fake_build_conf_data.id)
         build_conf_page.go_to_build_conf_page()

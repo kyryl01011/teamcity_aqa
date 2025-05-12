@@ -1,0 +1,91 @@
+2025-05-12 21:37:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (setup)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d ''
+2025-05-12 21:37:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user[0m
+curl -X POST 'http://localhost:8111/app/rest/users' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:6ebc01d2-6d24-4012-8f60-1f5fcce23bb8\
+-H Cookie:TCSESSIONID=384101C70C15EC64AA70FCFFE67432A9; RecentLogin=\
+-H Content-Length:151\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d '{"username": "newspaper", "password": "nbZOVQDICb5", "email": "jamesgreen@example.org", "roles": {"role": [{"roleId": "PROJECT_ADMIN", "scope": "g"}]}}' 
+
+2025-05-12 21:37:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic bmV3c3BhcGVyOm5iWk9WUURJQ2I1 \
+-d '' 
+
+2025-05-12 21:37:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user[0m
+curl -X POST 'http://localhost:8111/app/rest/projects' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:952cd8ed-8e24-4039-9f5d-b4a71d68197c\
+-H Cookie:TCSESSIONID=624703CA59A5A720DA485D96214631AE; RecentLogin=\
+-H Content-Length:112\
+-H Authorization:Basic bmV3c3BhcGVyOm5iWk9WUURJQ2I1 \
+-d '{"parentProject": {"locator": "_Root"}, "name": "ready", "id": "kcQYrbGQW0k", "copyAllAssociatedSettings": true}'
+2025-05-12 21:37:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:6ebc01d2-6d24-4012-8f60-1f5fcce23bb8\
+-H Cookie:TCSESSIONID=384101C70C15EC64AA70FCFFE67432A9\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d '' 
+
+2025-05-12 21:37:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X DELETE 'http://localhost:8111/app/rest/projects/id:kcQYrbGQW0k' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:6ebc01d2-6d24-4012-8f60-1f5fcce23bb8\
+-H Cookie:TCSESSIONID=384101C70C15EC64AA70FCFFE67432A9\
+-H Content-Length:0\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d '' 
+
+2025-05-12 21:37:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X GET 'http://localhost:8111/app/rest/projects' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:6ebc01d2-6d24-4012-8f60-1f5fcce23bb8\
+-H Cookie:TCSESSIONID=384101C70C15EC64AA70FCFFE67432A9\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d '' 
+
+2025-05-12 21:37:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X DELETE 'http://localhost:8111/app/rest/users/newspaper' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:6ebc01d2-6d24-4012-8f60-1f5fcce23bb8\
+-H Cookie:TCSESSIONID=384101C70C15EC64AA70FCFFE67432A9\
+-H Content-Length:0\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d ''

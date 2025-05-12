@@ -1,0 +1,53 @@
+2025-05-12 21:17:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (setup)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d ''
+2025-05-12 21:17:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user[0m
+curl -X POST 'http://localhost:8111/app/rest/users' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:cbcc4172-ac09-41ba-a9d0-65e9955b6f4c\
+-H Cookie:TCSESSIONID=DFAF0E65DDC919682A55377DFF7D0389; RecentLogin=\
+-H Content-Length:148\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d '{"username": "season", "password": "ZCoRhJ6HMzq", "email": "dpatterson@example.org", "roles": {"role": [{"roleId": "PROJECT_ADMIN", "scope": "g"}]}}' 
+
+2025-05-12 21:17:00 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic c2Vhc29uOlpDb1JoSjZITXpx \
+-d ''
+2025-05-12 21:17:01 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:cbcc4172-ac09-41ba-a9d0-65e9955b6f4c\
+-H Cookie:TCSESSIONID=DFAF0E65DDC919682A55377DFF7D0389\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d '' 
+
+2025-05-12 21:17:01 [32mINFO[0m [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X DELETE 'http://localhost:8111/app/rest/users/season' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:cbcc4172-ac09-41ba-a9d0-65e9955b6f4c\
+-H Cookie:TCSESSIONID=DFAF0E65DDC919682A55377DFF7D0389\
+-H Content-Length:0\
+-H Authorization:Basic OjQzNzcyNzgwMjIxMTkxNjMxMjc= \
+-d ''

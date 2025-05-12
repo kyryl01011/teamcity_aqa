@@ -1,0 +1,1 @@
+{'id': 'kbOuEKeyLRG', 'name': 'throughout', 'project': {'id': 'A0BhtORuUf0'}, 'steps': {'name': 'movement', 'type': 'consider', 'properties': {'property': [{'name': 'script.content', 'value': "echo 'Hello World!'"}, {'name': 'teamcity.step.mode', 'value': 'default'}, {'name': 'use.custom.script', 'value': 'true'}]}}}
