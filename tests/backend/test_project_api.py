@@ -4,7 +4,7 @@ from data.project_data import ProjectResponseModel
 from data.rub_build_data import RunBuildDataResponse
 from enums.roles import Roles
 
-class TestCreateProject:
+class TestProjectManagement:
     # project_data = None
     # @classmethod
     # def setup_class(cls):
@@ -48,7 +48,7 @@ class TestCreateProject:
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.link('https://www.jetbrains.com/help/teamcity/rest/teamcity-rest-api-documentation.html', name='documentation')
     def test_create_project_build_conf_as_user(self, super_admin, user_create, project_data, build_conf_data, run_build_data):
-        ### Create new project with freshly generated user and fake project data
+        # Create new project with freshly generated user and fake project data
         with allure.step('Create test user with fake user-data, generate fake project data'):
             new_user = user_create(Roles.PROJECT_ADMIN.value)
             new_user.api_manager.auth_api.auth_and_get_csrf_token(new_user.creds)
@@ -58,14 +58,16 @@ class TestCreateProject:
             project_response = ProjectResponseModel.model_validate_json(create_project_response)
         with allure.step(f'Check if generated fake project ID: "{project_response.id}" equals ID from respond "{fake_project_data.id}"'):
             assert project_response.id == fake_project_data.id, f'Expected {fake_project_data.id} but got {project_response.id}'
-        ### Create build configuration for created project
+
+        # Create build configuration for created project
         with allure.step(f'Create build conf for created project {project_response.id}'):
             fake_build_conf_data = build_conf_data(fake_project_data.id)
             create_build_conf_response = new_user.api_manager.project_api.create_build_conf(fake_build_conf_data.model_dump()).text
             build_conf_response = BuildConfDataResponseModel.model_validate_json(create_build_conf_response)
         with allure.step(f'Check if created fake build conf ID: "{fake_build_conf_data.id}" equals ID from respond "{build_conf_response.id}"'):
             assert fake_build_conf_data.id == build_conf_response.id, f'Generated build conf id: {fake_build_conf_data.id} not equals to responded build conf id: {build_conf_response.id}'
-        ### Run created build configuration
+
+        # Run created build configuration
         with allure.step(f'Test run created project build configuration with id: {build_conf_response.id}'):
             fake_run_build_data = run_build_data(fake_build_conf_data.id)
             run_build_conf_response = new_user.api_manager.project_api.run_build_conf(fake_run_build_data.model_dump()).text
