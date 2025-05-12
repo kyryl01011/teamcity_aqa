@@ -90,7 +90,7 @@ def user_create(user_session, super_admin: User):
 @pytest.fixture(scope='session')
 def browser():
     playwright = sync_playwright().start()
-    browser = playwright.chromium.launch(headless=False, slow_mo=300)
+    browser = playwright.chromium.launch(slow_mo=1000)
     yield browser
     browser.close()
     playwright.stop()
