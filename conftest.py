@@ -90,7 +90,7 @@ def user_create(user_session, super_admin: User):
 @pytest.fixture(scope='session')
 def browser():
     playwright = sync_playwright().start()
-    browser = playwright.chromium.launch(slow_mo=1000)
+    browser = playwright.chromium.launch(slow_mo=3000)
     yield browser
     browser.close()
     playwright.stop()
@@ -99,7 +99,7 @@ def browser():
 def new_page(browser):
     page = browser.new_page()
     # set length of default timeout for PW actions / give more time to GitHub Actions free machines
-    page.set_default_timeout(30000)
+    page.set_default_timeout(180000)
     yield page
     page.close()
 
