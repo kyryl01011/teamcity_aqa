@@ -23,7 +23,7 @@ class CreationMethodsFragment(BasePage):
 class ProjectCreationFormFragment(BasePage):
     def __init__(self, page):
         super().__init__(page)
-        self.project_name_input_selector = 'input[name="name"]'
+        self.project_name_input_selector = 'input#name'
         self.project_id_input_selector = 'input#externalId'
         self.project_description_input_selector = 'input#description'
         self.create_project_button_selector = 'input#createProject'
