@@ -17,5 +17,4 @@ class LaunchedBuildPage(BasePage):
 
     def wait_for_success(self):
         with allure.step(f'Wait for selector: {self.build_status_selector} to appear'):
-            self.page.pause()
             self.actions.wait_selector(self.build_status_selector, timeout=180000)
