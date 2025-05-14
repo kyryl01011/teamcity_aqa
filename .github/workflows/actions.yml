@@ -96,4 +96,4 @@ jobs:
         if: always()
         with:
           name: allure-results
-          path: ${{ github.workspace }}
+          path: ${{ github.workspace }}/allure-results
