@@ -90,6 +90,7 @@ jobs:
 
       - name: Authorize Agent
         run: |
+          docker ps -a
           pytest -v ./tests/backend/test_authorize_agent.py
 
       - name: Run Tests
