@@ -1,6 +1,7 @@
 import allure
 
 from pages.base_page import BasePage
+from playwright.sync_api import TimeoutError as PWTimeoutError
 
 
 class LaunchedBuildPage(BasePage):
@@ -19,5 +20,5 @@ class LaunchedBuildPage(BasePage):
         with allure.step(f'Wait for selector: {self.build_status_selector} to appear'):
             try:
                 self.actions.wait_selector(self.build_status_selector, timeout=30000)
-            except TimeoutError as e:
+            except PWTimeoutError as e:
                 print('CURRENT PAGE', self.page.url)
