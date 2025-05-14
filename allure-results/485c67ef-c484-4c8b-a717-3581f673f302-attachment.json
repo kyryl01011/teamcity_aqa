@@ -1,0 +1,1 @@
+{'id': 'bzzeN3TUGtK', 'name': 'other', 'project': {'id': 'z8iLObOfJl1'}, 'steps': {'name': 'challenge', 'type': 'nation', 'properties': {'property': [{'name': 'script.content', 'value': "echo 'Hello World!'"}, {'name': 'teamcity.step.mode', 'value': 'default'}, {'name': 'use.custom.script', 'value': 'true'}]}}}

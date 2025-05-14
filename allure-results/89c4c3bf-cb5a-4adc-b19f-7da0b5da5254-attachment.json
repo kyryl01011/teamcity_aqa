@@ -1,0 +1,1 @@
+{'id': 'PZM7XCYqb0I', 'name': 'head', 'project': {'id': 'NSwnN6Lbn9K'}, 'steps': {'name': 'remain', 'type': 'leave', 'properties': {'property': [{'name': 'script.content', 'value': "echo 'Hello World!'"}, {'name': 'teamcity.step.mode', 'value': 'default'}, {'name': 'use.custom.script', 'value': 'true'}]}}}

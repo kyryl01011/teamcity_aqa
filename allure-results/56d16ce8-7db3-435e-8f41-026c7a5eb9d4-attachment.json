@@ -1,0 +1,1 @@
+{'id': 'C0b2m1miSf5', 'name': 'public', 'project': {'id': 'lhljZrvKMbO'}, 'steps': {'name': 'find', 'type': 'cost', 'properties': {'property': [{'name': 'script.content', 'value': "echo 'Hello World!'"}, {'name': 'teamcity.step.mode', 'value': 'default'}, {'name': 'use.custom.script', 'value': 'true'}]}}}

@@ -1,0 +1,91 @@
+2025-05-14 17:00:27 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (setup)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic OjE3Mzc5MjU4MTQ3MjE2ODMzMDE= \
+-d ''
+2025-05-14 17:00:27 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user[0m
+curl -X POST 'http://localhost:8111/app/rest/users' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:f10294db-5bf7-4bc1-afae-148d7480f6f2\
+-H Cookie:TCSESSIONID=AA674276EE33320A3C9194E3BC488EF7; RecentLogin=\
+-H Content-Length:151\
+-H Authorization:Basic OjE3Mzc5MjU4MTQ3MjE2ODMzMDE= \
+-d '{"username": "work", "password": "KvfKdcNtkba", "email": "williamswilliam@example.net", "roles": {"role": [{"roleId": "PROJECT_ADMIN", "scope": "g"}]}}' 
+
+2025-05-14 17:00:27 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic d29yazpLdmZLZGNOdGtiYQ== \
+-d '' 
+
+2025-05-14 17:00:27 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user[0m
+curl -X POST 'http://localhost:8111/app/rest/projects' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:36710b70-61fe-45cc-8f46-790f9b923758\
+-H Cookie:TCSESSIONID=3753B97C77384EFBA0E000AE0FA7A403; RecentLogin=\
+-H Content-Length:111\
+-H Authorization:Basic d29yazpLdmZLZGNOdGtiYQ== \
+-d '{"parentProject": {"locator": "_Root"}, "name": "upon", "id": "LkjpXbxcRCJ", "copyAllAssociatedSettings": true}'
+2025-05-14 17:00:27 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:f10294db-5bf7-4bc1-afae-148d7480f6f2\
+-H Cookie:TCSESSIONID=AA674276EE33320A3C9194E3BC488EF7\
+-H Authorization:Basic OjE3Mzc5MjU4MTQ3MjE2ODMzMDE= \
+-d '' 
+
+2025-05-14 17:00:27 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X DELETE 'http://localhost:8111/app/rest/projects/id:LkjpXbxcRCJ' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:f10294db-5bf7-4bc1-afae-148d7480f6f2\
+-H Cookie:TCSESSIONID=AA674276EE33320A3C9194E3BC488EF7\
+-H Content-Length:0\
+-H Authorization:Basic OjE3Mzc5MjU4MTQ3MjE2ODMzMDE= \
+-d '' 
+
+2025-05-14 17:00:27 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X GET 'http://localhost:8111/app/rest/projects' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:f10294db-5bf7-4bc1-afae-148d7480f6f2\
+-H Cookie:TCSESSIONID=AA674276EE33320A3C9194E3BC488EF7\
+-H Authorization:Basic OjE3Mzc5MjU4MTQ3MjE2ODMzMDE= \
+-d '' 
+
+2025-05-14 17:00:27 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_successfully_create_project_as_user (teardown)[0m
+curl -X DELETE 'http://localhost:8111/app/rest/users/work' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:f10294db-5bf7-4bc1-afae-148d7480f6f2\
+-H Cookie:TCSESSIONID=AA674276EE33320A3C9194E3BC488EF7\
+-H Content-Length:0\
+-H Authorization:Basic OjE3Mzc5MjU4MTQ3MjE2ODMzMDE= \
+-d ''

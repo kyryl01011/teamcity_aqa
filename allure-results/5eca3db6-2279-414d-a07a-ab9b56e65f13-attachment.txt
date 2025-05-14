@@ -1,0 +1,19 @@
+2025-05-14 17:00:26 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_delete_all_projects (setup)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:*/*\
+-H Connection:keep-alive\
+-H Authorization:Basic OjE3Mzc5MjU4MTQ3MjE2ODMzMDE= \
+-d ''
+2025-05-14 17:00:26 INFO [32mpytest tests/backend/test_project_api.py::TestProjectManagement::test_delete_all_projects[0m
+curl -X GET 'http://localhost:8111/app/rest/projects' \
+-H User-Agent:python-requests/2.32.3\
+-H Accept-Encoding:gzip, deflate, zstd\
+-H Accept:application/json\
+-H Connection:keep-alive\
+-H Content-Type:application/json\
+-H X-TC-CSRF-Token:40e358e4-3ea7-45b6-a821-353b37a3b37a\
+-H Cookie:TCSESSIONID=BFE93BF866D9CF16C7005343BCF31583; RecentLogin=\
+-H Authorization:Basic OjE3Mzc5MjU4MTQ3MjE2ODMzMDE= \
+-d ''

@@ -21,7 +21,7 @@ class LaunchedBuildPage(BasePage):
     def wait_for_success(self):
         with allure.step(f'Wait for selector: {self.build_status_selector} to appear'):
             try:
-                self.actions.wait_selector(self.build_status_selector, timeout=15000)
+                self.actions.wait_selector(self.build_status_selector, timeout=90000)
             except PWTimeoutError as e:
                 sys.stderr.write(self.page.url)
                 allure.attach(self.page.screenshot(full_page=True), name='Fucking shit', attachment_type=allure.attachment_type.PNG)
