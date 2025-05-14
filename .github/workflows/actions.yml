@@ -49,6 +49,12 @@ jobs:
             echo "Port 8111 is not open."
           fi
 
+      - name: Run TeamCity Agent Container
+        run: |
+          docker run -d --name teamcity-agent-instance -e SERVER_URL="http://localhost:8111" jetbrains/teamcity-agent
+          docker ps -a
+          echo "Run TeamCity Agent"
+
       - name: Install Python Dependencies
         run: |
           sudo apt-get update
@@ -82,11 +88,11 @@ jobs:
 
         shell: /usr/bin/bash -e {0}
 
-      - name: Run TeamCity Agent Container
+      - name: Get TeamCity Server IP
+        id: get_server_ip
         run: |
-          docker run -d --name teamcity-agent-instance -e SERVER_URL="http://localhost:8111" jetbrains/teamcity-agent
-          docker ps -a
-          echo "Run TeamCity Agent"
+          SERVER_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' teamcity-server-instance)
+          echo "TEAMCITY_SERVER_IP=$SERVER_IP" >> $GITHUB_OUTPUT
 
       - name: Authorize Agent
         run: |
