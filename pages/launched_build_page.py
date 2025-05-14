@@ -1,3 +1,5 @@
+import sys
+
 import allure
 
 from pages.base_page import BasePage
@@ -19,6 +21,8 @@ class LaunchedBuildPage(BasePage):
     def wait_for_success(self):
         with allure.step(f'Wait for selector: {self.build_status_selector} to appear'):
             try:
-                self.actions.wait_selector(self.build_status_selector, timeout=30000)
+                self.actions.wait_selector(self.build_status_selector, timeout=15000)
             except PWTimeoutError as e:
-                print('CURRENT PAGE', self.page.url)
+                sys.stderr.write(self.page.url)
+                self.page.screenshot(path="playwright-report/test-results/timeout_on_some_locator.png")
+                raise e

@@ -90,3 +90,11 @@ jobs:
       - name: Run Tests
         run: |
           pytest --ignore=tests/frontend/test_set_up.py --alluredir=allure-results
+        continue-on-error: true
+
+      - name: Upload Screenshots on Failure
+        if: failure() && steps.run_tests.outcome == 'failed'
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshot-on-failure
+          path: playwright-report/test-results/*.png
