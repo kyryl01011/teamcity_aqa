@@ -22,15 +22,15 @@ class ProjectAPI(CustomRequester):
 
     def create_project(self, project_data, expected_status_code=HTTPStatus.OK):
         with allure.step(f'Create project with data: {project_data}'):
-            return self.send_request('POST', '/app/rest/projects', project_data, expected_status_code)
+            return self.send_request('POST', '/app/rest/projects', json=project_data, expected_status=expected_status_code)
 
     def create_build_conf(self, build_conf_data, expected_status_code=HTTPStatus.OK):
         with allure.step(f'Create build configuration with data: {build_conf_data}'):
-            return self.send_request('POST', '/app/rest/buildTypes', build_conf_data, expected_status_code)
+            return self.send_request('POST', '/app/rest/buildTypes', json=build_conf_data, expected_status=expected_status_code)
 
     def run_build_conf(self, run_conf_data, expected_status_code=HTTPStatus.OK):
         with allure.step(f'Run build configuration with data: {run_conf_data}'):
-            return self.send_request('POST', '/app/rest/buildQueue', run_conf_data, expected_status_code)
+            return self.send_request('POST', '/app/rest/buildQueue', json=run_conf_data, expected_status=expected_status_code)
 
     def get_projects(self):
         with allure.step(f'Get projects list'):
