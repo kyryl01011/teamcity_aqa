@@ -49,9 +49,15 @@ jobs:
             echo "Port 8111 is not open."
           fi
 
+      - name: Get TeamCity Server IP
+        id: get_server_ip
+        run: |
+          SERVER_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' teamcity-server-instance)
+          echo "TEAMCITY_SERVER_IP=$SERVER_IP" >> $GITHUB_OUTPUT
+
       - name: Run TeamCity Agent Container
         run: |
-          docker run -d --name teamcity-agent-instance -e SERVER_URL="http://localhost:8111" jetbrains/teamcity-agent
+          docker run -d --name teamcity-agent-instance -e SERVER_URL="http://${{ steps.get_server_ip.outputs.TEAMCITY_SERVER_IP }}:8111" jetbrains/teamcity-agent
           docker ps -a
           echo "Run TeamCity Agent"
 
@@ -87,12 +93,6 @@ jobs:
           fi
 
         shell: /usr/bin/bash -e {0}
-
-      - name: Get TeamCity Server IP
-        id: get_server_ip
-        run: |
-          SERVER_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' teamcity-server-instance)
-          echo "TEAMCITY_SERVER_IP=$SERVER_IP" >> $GITHUB_OUTPUT
 
       - name: Authorize Agent
         run: |
