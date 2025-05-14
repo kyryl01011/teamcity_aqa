@@ -51,7 +51,7 @@ jobs:
 
       - name: Run TeamCity Agent Container
         run: |
-          docker run -d --name teamcity-agent-instance -e SERVER_URL="http://localhost:8111" jetbrains/teamcity-agent
+          docker run -d --name teamcity-agent-instance -e SERVER_URL="teamcity-server-instance:8111" jetbrains/teamcity-agent
           docker ps -a
           echo "Run TeamCity Agent"
 
