@@ -99,7 +99,7 @@ def browser():
 def new_page(browser):
     page = browser.new_page()
     # set length of default timeout for PW actions / give more time to GitHub Actions free machines
-    page.set_default_timeout(180000)
+    page.set_default_timeout(30000)
     yield page
     page.close()
 

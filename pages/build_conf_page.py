@@ -22,5 +22,4 @@ class BuildConfPage(BasePage):
     def go_to_launched_build_url(self):
         with allure.step(f'Go to launched build url from selector: {self.run_build_status_popup_selector}'):
             url_endpoint = self.actions.get_attribute_value_of_selector(self.run_build_status_popup_selector, 'href')
-            print(url_endpoint)
             self.actions.go_to_url(self._get_url(url_endpoint))
