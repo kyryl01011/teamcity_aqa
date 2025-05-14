@@ -52,6 +52,7 @@ jobs:
       - name: Run TeamCity Agent Container
         run: |
           docker run -d --name teamcity-agent-instance -e SERVER_URL="http://localhost:8111" jetbrains/teamcity-agent
+          docker ps -a
           echo "Run TeamCity Agent"
 
       - name: Install Python Dependencies
@@ -86,6 +87,10 @@ jobs:
           fi
 
         shell: /usr/bin/bash -e {0}
+
+      - name: Authorize Agent
+        run: |
+          pytest -v ./tests/backend/test_authorize_agent.py
 
       - name: Run Tests
         run: |

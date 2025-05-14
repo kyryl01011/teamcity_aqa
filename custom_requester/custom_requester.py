@@ -13,10 +13,10 @@ class CustomRequester:
         self.base_url = BASE_URL
         self.logger = logging.getLogger(__name__)
 
-    def send_request(self, method, endpoint, data=None, expected_status=200, need_logging=True):
-        with allure.step(f'Sending {method} request to {self.base_url + endpoint} with data: {data}, expected_status: {expected_status}'):
+    def send_request(self, method, endpoint, json=None, data=None, expected_status=200, need_logging=True):
+        with allure.step(f'Sending {method} request to {self.base_url + endpoint} with body: {json}{data}, expected_status: {expected_status}'):
             url = self.base_url + endpoint
-            response = self.session.request(method, url, json=data)
+            response = self.session.request(method, url, json=json, data=data)
             if need_logging:
                 self.log_request_and_response(response)
             if response.status_code != expected_status:
