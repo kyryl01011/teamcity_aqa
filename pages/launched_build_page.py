@@ -24,5 +24,5 @@ class LaunchedBuildPage(BasePage):
                 self.actions.wait_selector(self.build_status_selector, timeout=15000)
             except PWTimeoutError as e:
                 sys.stderr.write(self.page.url)
-                self.page.screenshot(path="playwright-report/test-results/timeout_on_some_locator.png")
+                allure.attach(self.page.screenshot(full_page=True), name='Fucking shit', attachment_type=allure.attachment_type.PNG)
                 raise e
