@@ -1,10 +1,10 @@
 import allure
-from pages.build_conf_creation_page import BuildConfCreationPage
-from pages.build_conf_page import BuildConfPage
-from pages.create_project_page import CreateProjectPage
-from pages.launched_build_page import LaunchedBuildPage
-from pages.projects_page import ProjectsPage
-from data.project_data import ProjectResponseModel
+from src.pages.build_conf_creation_page import BuildConfCreationPage
+from src.pages.build_conf_page import BuildConfPage
+from src.pages.create_project_page import CreateProjectPage
+from src.pages.launched_build_page import LaunchedBuildPage
+from src.pages.projects_page import ProjectsPage
+from src.data.project_data import ProjectResponseModel
 
 @allure.title('Test create project | UI')
 @allure.description('Create new user, create project as new user | UI')

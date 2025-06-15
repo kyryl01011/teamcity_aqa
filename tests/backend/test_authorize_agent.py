@@ -1,6 +1,3 @@
-from enums.hosts import BASE_URL
-
-
 class TestAuthorizeAgent:
 
     def test_authorize_agent(self, super_admin):
